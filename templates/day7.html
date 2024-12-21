@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Den 7</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background: url('{{ url_for('static', filename='images/christmas-background.jpg') }}') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Great Vibes', cursive, sans-serif;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            height: 100vh; /* Allow full height */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Allow content to expand naturally */
+            overflow-y: auto; /* Enable scrolling */
+        }
+
+        .message-container {
+            background: rgba(255, 255, 255, 0.85); /* Slightly transparent white */
+            border-radius: 15px;
+            padding: 40px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+            position: relative;
+        }
+
+        .message-container::before {
+            content: '\1F384'; /* Christmas tree emoji */
+            font-size: 3rem;
+            position: absolute;
+            top: -20px;
+            left: 20px;
+        }
+
+        .message-container::after {
+            content: '\2744'; /* Snowflake emoji */
+            font-size: 2.5rem;
+            position: absolute;
+            bottom: -20px;
+            right: 20px;
+        }
+
+        h1 {
+            color: #d54e21;
+            text-shadow: 0 0 10px rgba(213, 78, 33, 0.6);
+        }
+
+        h2 {
+            color: #d54e21;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        h3 {
+            color: #d54e21;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        p, ul, ol {
+            font-size: 1.4em;
+            line-height: 1.6;
+            color: #333; /* Dark gray text for better readability */
+            text-align: left;
+        }
+
+        ul, ol {
+            margin-left: 40px; /* Indentation for lists */
+        }
+
+        ul li, ol li {
+            margin-bottom: 10px;
+        }
+
+        .image-container {
+            margin-top: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #d54e21;
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #b14019;
+        }
+        footer {
+    font-size: 1.1rem; /* Increase font size */
+    color: #d54e21; /* Change text color to something more visible (bright gold) */
+    background-color: rgba(0, 0, 0, 0.7); /* Add a dark background for contrast */
+    padding: 10px 15px; /* Add padding for better spacing */
+    border-radius: 10px; /* Optional: rounded corners for the footer */
+    margin-top: 20px; /* Give some spacing between content and footer */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Add a shadow to make it pop */
+}
+
+    </style>
+</head>
+<body>
+    <div class="message-container">
+        <h1>Den 7</h1>
+        <p>Můj milý Bubínečku,</p>
+
+        <p>Na dnešní den bych Ti rád přinesl inspiraci z jedné z nejkrásnějších vánočních knih, <em>Vánoční koleda</em> od Charlese Dickense. Příběh starého a zahořklého Scroogea, který se naučí otevřít své srdce a přijmout lásku, je pro mě připomínkou, jak důležitá je láska a jak nás Vánoce mohou změnit. Chci Ti slíbit, že stejně jako Scrooge se každý den budu snažit být pro Tebe lepší a více přítomný. A stejně jako on, chci sdílet s Tebou kouzlo Vánoc, které z nás dělá lepší lidi.</p>
+
+        <blockquote>
+            <p>„Na Vánocích je krásné, že nám ukazují, že je vždy čas na změnu a lásku.”</p>
+            <footer>— Charles Dickens, <em>Vánoční koleda</em></footer>
+        </blockquote>
+
+        <p>Celý příběh si můžeš poslechnout tady (má 4 části): <a href="https://youtu.be/jxa7kKPSAeU" target="_blank">A Christmas Carol (Czech version)</a></p>
+
+        <!-- Back to calendar button -->
+        <a href="/" class="back-button">Zpátky do kalendáře</a>
+    </div>
+
+</body>
+</html>

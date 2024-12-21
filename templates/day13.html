@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Den 13: Naše Vánoční hvězdná mapa</title>
+    <link rel="stylesheet" href="https://unpkg.com/photoswipe@5.2.1/dist/photoswipe.css">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: url('{{ url_for('static', filename='images/christmas-background.jpg') }}') no-repeat center center fixed;
+            background-size: cover;
+            text-align: center;
+            color: #fff;
+            padding: 20px;
+        }
+        .header {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: #ffeb3b;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.9);
+            margin-bottom: 20px;
+        }
+        .star-map-container {
+            max-width: 90%;
+            margin: 0 auto;
+        }
+        .message {
+            font-size: 1.5rem;
+            margin-top: 15px;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+        .back-button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #d54e21;
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .back-button:hover {
+            background-color: #b14019;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="header">Den 13: Naše Vánoční hvězdná mapa</h1>
+    <div class="star-map-container">
+        <a href="{{ url_for('static', filename='images/star-map.png') }}" data-pswp-width="1200" data-pswp-height="800">
+            <img src="{{ url_for('static', filename='images/star-map.png') }}" alt="Star Map" style="width: 100%; max-width: 700px;">
+        </a>
+    </div>
+    <p class="message">Toto je mapa hvězd z momentu, kdy jsme se poprvé potkali. Náš příběh začal pod těmito hvězdami. Půjdeme se dnes projít a podívat na hvězdy? Jak se asi změnily...🌟</p>
+    <a href="/" class="back-button">Zpátky do kalendáře</a>
+
+    <!-- PhotoSwipe HTML structure -->
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="pswp__bg"></div>
+        <div class="pswp__scroll-wrap">
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+            </div>
+            <div class="pswp__ui pswp__ui--hidden">
+                <div class="pswp__top-bar">
+                    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/photoswipe@5.2.1/dist/photoswipe.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const lightbox = new PhotoSwipe({
+                gallery: '.star-map-container',
+                children: 'a',
+                pswpModule: PhotoSwipe
+            });
+            lightbox.init();
+        });
+    </script>
+</body>
+</html>

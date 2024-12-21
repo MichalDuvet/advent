@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Den 24: Otevření Dárků 🎁</title>
+    <style>
+        body {
+            background: url('{{ url_for('static', filename='images/cozy-room.jpg') }}') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            font-family: 'Dancing Script', cursive;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1 {
+            margin-top: 20px;
+            font-size: 2.5em;
+            color: #fff;
+        }
+
+        .message {
+            font-size: 1.5em;
+            color: #000;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 10px;
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .presents-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 250px; /* Adjust the margin to position presents */
+            margin-bottom: auto;
+        }
+
+        .present {
+            font-size: 3em;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .present.open {
+            transform: scale(1.1);
+        }
+
+        .back-button {
+            display: block;
+            text-align: center;
+            padding: 10px 20px;
+            color: #000;
+            background-color: #ffeb3b;
+            font-size: 1.5em;
+            border-radius: 10px;
+            text-decoration: none;
+            width: fit-content;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .back-button:hover {
+            background-color: #ffe34b;
+            transform: scale(1.05);
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding-top: 50px;
+            text-align: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .modal-content p {
+            color: #000; /* Change text color to black for better contrast */
+            font-size: 1.3em;
+            margin-top: 20px;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-family: Arial, sans-serif;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            .message {
+                font-size: 1.2em;
+            }
+            .present {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>🎄 Den 24: Otevření Dárků 🎁</h1>
+
+    <div class="message">
+        <p>Vsadím se, že se nemůžeš dočkat až dnes otevřeme dárky! Tady jich tedy máš pár k otevření už teď! 🎁🎄</p>
+    </div>
+
+    <div class="presents-container">
+        <div class="present present1" onclick="openPresent(1)">🎁</div>
+        <div class="present present2" onclick="openPresent(2)">🎁</div>
+        <div class="present present3" onclick="openPresent(3)">🎁</div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="presentImage" src="" alt="Gift">
+            <p id="presentMessage"></p>
+        </div>
+    </div>
+
+    <a href="/" class="back-button">🎅 Zpátky do kalendáře 🎅</a>
+
+    <script>
+        function openPresent(number) {
+            // Open the modal
+            var modal = document.getElementById("myModal");
+            var presentImage = document.getElementById("presentImage");
+            var presentMessage = document.getElementById("presentMessage");
+
+            // Set different content based on the present clicked
+            if (number === 1) {
+                presentImage.src = "{{ url_for('static', filename='images/photo1.png') }}"; // Image from static folder
+                presentMessage.innerHTML = "Česká Vánoční klasika! Ponožtička! ❤️";
+            } else if (number === 2) {
+                presentImage.src = "{{ url_for('static', filename='images/photo2.jpg') }}"; // Image from static folder
+                presentMessage.innerHTML = "Tvůj vysněný dárek! 🎁";
+            } else if (number === 3) {
+                presentImage.src = "{{ url_for('static', filename='images/photo3.jpeg') }}"; // Image from static folder
+                presentMessage.innerHTML = "Miluju tě! 😘";
+            }
+
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+    </script>
+</body>
+</html>

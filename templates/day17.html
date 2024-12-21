@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 17 - Snow Globe</title>
+    <style>
+        body {
+            font-family: 'Dancing Script', cursive, sans-serif;
+            background: url('{{ url_for('static', filename='images/christmas-background.jpg') }}') no-repeat center center fixed;
+            background-size: cover;
+            color: #f8f9fa;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            overflow-y: auto;
+            height: 100%;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .snow-globe-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            background: url('{{ url_for('static', filename='images/snow-globe.jpg') }}') no-repeat center center;
+            background-size: cover; /* Adjusts the image size to cover the circle */
+            margin: 0 auto;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%; /* Makes the snow globe circular */
+        }
+
+        .snowflakes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            background-color: #fff;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: snowAnimation 10s linear infinite;
+        }
+
+        @keyframes snowAnimation {
+            0% {
+                top: -10px;
+                left: calc(100% * var(--random-x));
+                transform: translateX(0);
+            }
+            100% {
+                top: 100%;
+                left: calc(100% * var(--random-x));
+                transform: translateX(var(--random-x));
+            }
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-top: 20px;
+            color: #d54e21;
+        }
+
+        .message {
+            font-size: 1.2em;
+            color: #f8f9fa;
+            margin: 20px 0;
+        }
+
+        .return-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #d54e21;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .return-button:hover {
+            background-color: #a03a1b;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .snow-globe-container {
+                width: 250px;
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .snow-globe-container {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="snow-globe-container">
+        <div class="snowflakes" id="snowflakes"></div>
+    </div>
+
+    <h2>Den 17: Tvoje Vánoční Sněhová Koule 🎄</h2>
+    <p class="message"> K dnešnímu dni pro Tebe mám tuhle krásnou sněhovou kouli. Snad Tě potěší. <br> Nezapomeň si zítra otevřít další okýnko! ❤️</p>
+
+    <a href="{{ url_for('home') }}">
+        <button class="return-button">🎅 Zpět do kalendáře 🎅</button>
+    </a>
+
+    <script>
+        // Function to create snowflakes
+        function createSnowflakes(num) {
+            const snowflakesContainer = document.getElementById('snowflakes');
+
+            for (let i = 0; i < num; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                snowflake.style.width = `${Math.random() * 10 + 5}px`;
+                snowflake.style.height = snowflake.style.width;
+                snowflake.style.left = `${Math.random() * 100}%`;
+                snowflake.style.animationDuration = `${Math.random() * 5 + 5}s`; // Random animation speed
+                snowflake.style.animationDelay = `${Math.random() * 5}s`; // Random delay
+                snowflake.style.setProperty('--random-x', Math.random() * 2 - 1); // Random x movement
+                snowflakesContainer.appendChild(snowflake);
+            }
+        }
+
+        // Initialize snowflakes
+        createSnowflakes(50); // Adjust number of snowflakes
+    </script>
+</body>
+</html>

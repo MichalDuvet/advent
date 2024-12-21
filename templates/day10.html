@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Den 10: Vánoční pexeso</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: url('{{ url_for('static', filename='images/christmas-background.jpg') }}') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Quicksand', sans-serif;
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+        }
+
+        .header {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: #ffeb3b;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.9);
+            margin: 20px 0;
+        }
+
+        .game-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .card {
+            width: 80px;
+            height: 80px;
+            background-color: #d54e21;
+            border: 3px solid #fff;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            color: transparent;
+            transition: transform 0.3s, background-color 0.3s, color 0.3s;
+            font-family: 'Apple Color Emoji', 'Segoe UI', 'Quicksand', sans-serif; /* Added Apple Color Emoji */
+            min-width: 80px;
+            min-height: 80px;
+        }
+
+        .card.flipped {
+            background-color: #ffeb3b;
+            color: #d54e21;
+            transform: rotateY(180deg);
+        }
+
+        .back-button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #d54e21;
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-button:hover {
+            background-color: #b14019;
+        }
+
+        .message {
+            margin-top: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                width: 60px;
+                height: 60px;
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="header">Den 10: Zahrej si Vánoční pexeso</h1>
+    <div class="game-container" id="gameContainer">
+        <!-- Cards will be dynamically generated here -->
+    </div>
+    <p class="message" id="gameMessage"></p>
+    <a href="/" class="back-button">Zpátky do kalendáře</a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const gameContainer = document.getElementById('gameContainer');
+            const message = document.getElementById('gameMessage');
+            const cards = ['🎄', '🎅', '❄️', '🎁', '⛄', '🦌', '🔔', '🕯️', '🎄', '🎅', '❄️', '🎁', '⛄', '🦌', '🔔', '🕯️'];
+            let flippedCards = [];
+            let matchedPairs = 0;
+
+            // Shuffle cards
+            cards.sort(() => 0.5 - Math.random());
+
+            // Create card elements
+            cards.forEach(symbol => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.dataset.symbol = symbol;
+                card.addEventListener('click', handleCardClick);
+                gameContainer.appendChild(card);
+            });
+
+            function handleCardClick(event) {
+                const clickedCard = event.target;
+
+                if (flippedCards.length < 2 && !clickedCard.classList.contains('flipped')) {
+                    clickedCard.classList.add('flipped');
+                    clickedCard.textContent = clickedCard.dataset.symbol;
+                    flippedCards.push(clickedCard);
+                }
+
+                if (flippedCards.length === 2) {
+                    const [card1, card2] = flippedCards;
+                    if (card1.dataset.symbol === card2.dataset.symbol) {
+                        matchedPairs++;
+                        flippedCards = [];
+                        if (matchedPairs === cards.length / 2) {
+                            message.textContent = 'Gratulace! Našla jsi všechny páry! 🎉';
+                        }
+                    } else {
+                        setTimeout(() => {
+                            card1.classList.remove('flipped');
+                            card2.classList.remove('flipped');
+                            card1.textContent = '';
+                            card2.textContent = '';
+                            flippedCards = [];
+                        }, 1000);
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

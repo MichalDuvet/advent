@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Den 22: Vánoční Kvíz 🎄</title>
+    <style>
+        body {
+            background: url('{{ url_for('static', filename='images/snowy-night.jpeg') }}') no-repeat center center fixed;
+            background-size: cover;
+            color: red;
+            font-family: 'Dancing Script', cursive;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 2.5em;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+            color: red;
+        }
+
+        .quiz-container {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .question {
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+            color: red;
+        }
+
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+
+        .options li {
+            margin: 10px 0;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            color: #000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .submit-button:hover {
+            background-color: #ffe34b;
+            transform: scale(1.05);
+        }
+
+        .back-button {
+            display: block;
+            text-align: center;
+            margin: 20px auto;
+            padding: 10px 20px;
+            color: #000;
+            background-color: #ffeb3b;
+            font-size: 1.5em;
+            border-radius: 10px;
+            text-decoration: none;
+            width: fit-content;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .back-button:hover {
+            background-color: #ffe34b;
+            transform: scale(1.05);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            color: #000;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .modal button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .modal button:hover {
+            background-color: #ffe34b;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>🎄 Den 22: Vánoční Kvíz 🎄</h1>
+    <div class="quiz-container">
+        <div class="question">1. Kde jsme poprvé oslavili Vánoce společně? 🎅</div>
+        <ul class="options">
+            <li><label><input type="radio" name="q1" value="2"> V Žamberku</label></li>
+            <li><label><input type="radio" name="q1" value="1"> V Hradci Králové</label></li>
+            <li><label><input type="radio" name="q1" value="3"> V Ústí nad Orlicí</label></li>
+        </ul>
+        <div class="question">2. Jaké cukroví mám nejraději? 🍪</div>
+        <ul class="options">
+            <li><label><input type="radio" name="q2" value="3"> Linecké</label></li>
+            <li><label><input type="radio" name="q2" value="2"> Rumba koule</label></li>
+            <li><label><input type="radio" name="q2" value="1"> Perníčky</label></li>
+        </ul>
+        <div class="question">3. Jak se jmenuje knížka, kterou jsi loni dostala? 📖</div>
+        <ul class="options">
+            <li><label><input type="radio" name="q3" value="1"> Máma má práci</label></li>
+            <li><label><input type="radio" name="q3" value="2"> Buď jako kočka</label></li>
+            <li><label><input type="radio" name="q3" value="3"> Pláž v Chorvatsku</label></li>
+        </ul>
+        <div class="question">4. Kdo se narodil 24. prosince? 🎅</div>
+        <ul class="options">
+            <li><label><input type="radio" name="q4" value="1"> Louis Tomlinson(One Direction)</label></li>
+            <li><label><input type="radio" name="q4" value="2"> Kurt Cobain</label></li>
+            <li><label><input type="radio" name="q4" value="3"> Eva Holubová</label></li>
+        </ul>
+        <div class="question">5. Ve kterém roce byly natočeny Pelíšky? 📽️</div>
+        <ul class="options">
+            <li><label><input type="radio" name="q5" value="1"> 1996</label></li>
+            <li><label><input type="radio" name="q5" value="2"> 1999</label></li>
+            <li><label><input type="radio" name="q5" value="3"> 1991</label></li>
+        </ul>
+        <div class="question">6. Kdo dnes dostane masáž? ❤️</div>
+        <ul class="options">
+            <li><label><input type="radio" name="q6" value="1"> Dudu</label></li>
+            <li><label><input type="radio" name="q6" value="2"> Bubu</label></li>
+            <li><label><input type="radio" name="q6" value="3"> Vája</label></li>
+        </ul>
+        <button class="submit-button" onclick="submitQuiz()">Odeslat</button>
+    </div>
+
+    <a href="/" class="back-button">🎅 Zpátky do kalendáře 🎅</a>
+
+    <div class="overlay"></div>
+    <div class="modal" id="result-modal">
+        <p id="result-text"></p>
+        <button onclick="closeModal()">Zavřít</button>
+    </div>
+
+    <script>
+        function submitQuiz() {
+            const correctAnswers = ['2', '3', '1', '1', '2', '2'];
+            const selectedOptions = document.querySelectorAll('input[type="radio"]:checked');
+            const modal = document.getElementById('result-modal');
+            const overlay = document.querySelector('.overlay');
+            const resultText = document.getElementById('result-text');
+
+            if (selectedOptions.length < correctAnswers.length) {
+                resultText.textContent = 'Prosím odpověz na všechny otázky! ❄️';
+                modal.style.display = 'block';
+                overlay.style.display = 'block';
+                return;
+            }
+
+            let score = 0;
+            selectedOptions.forEach((option, index) => {
+                if (option.value === correctAnswers[index]) {
+                    score++;
+                }
+            });
+
+            resultText.textContent = `Máš ${score}/${correctAnswers.length} správně! 🎉`;
+            modal.style.display = 'block';
+            overlay.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('result-modal').style.display = 'none';
+            document.querySelector('.overlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

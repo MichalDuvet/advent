@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Den 9 - Vánoční Kvíz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background: url('{{ url_for('static', filename='images/christmas-background.jpg') }}') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Great Vibes', cursive, sans-serif;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            overflow-y: auto;
+        }
+
+        .message-container {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+            position: relative;
+        }
+
+        .message-container::before {
+            content: '\1F384';
+            font-size: 3rem;
+            position: absolute;
+            top: -20px;
+            left: 20px;
+        }
+
+        .message-container::after {
+            content: '\2744';
+            font-size: 2.5rem;
+            position: absolute;
+            bottom: -20px;
+            right: 20px;
+        }
+
+        h1 {
+            color: #d54e21;
+            text-shadow: 0 0 10px rgba(213, 78, 33, 0.6);
+        }
+
+        .quiz-container {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .question {
+            margin: 20px 0;
+        }
+
+        .answer {
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #d54e21;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #b14019;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #ffd700;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #d54e21;
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #b14019;
+        }
+
+        footer {
+            font-size: 1.1rem;
+            color: #d54e21;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .message-container p {
+            font-size: 1.3em;
+            color: #333;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+        }
+
+        @media screen and (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .message-container {
+                padding: 20px;
+            }
+            .quiz-container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="message-container">
+        <h1>Den 9 - Vánoční Kvíz</h1>
+
+        <p>Ahoj Bubínečku! Dnes máme malý vánoční kvíz. Odpověz na následující otázky a zjisti, jak moc znáš Vánoce!</p>
+
+        <div class="quiz-container">
+            <div class="question">
+                <p>Jak se jmenuje film, který si Kevin pouští, aby vyděsil zloděje během Vánoc?</p>
+                <div class="answer">
+                    <input type="radio" name="q1" value="A"> A) The Goodfellas: Christmas Edition
+                    <br>
+                    <input type="radio" name="q1" value="B"> B) Angels with Filthy Souls
+                    <br>
+                    <input type="radio" name="q1" value="C"> C) Midnight Heist: Christmas Chaos
+                    <br>
+                    <input type="radio" name="q1" value="D"> D) Silent Night, Deadly Night
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Kdy poprvé vyšla píseň "All I Want for Christmas Is You" od Mariah Carey a jaký byl její první úspěch?</p>
+                <div class="answer">
+                    <input type="radio" name="q2" value="A"> A) V roce 1990, okamžitě se stala vánoční klasikou
+                    <br>
+                    <input type="radio" name="q2" value="B"> B) V roce 1994, a v USA se stala první písní, která se během prosince dostala na první místo v hitparádě
+                    <br>
+                    <input type="radio" name="q2" value="C"> C) V roce 1995, Mariah Carey ji zpívala na vánočním koncertě pro UNICEF
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Jaký je můj oblíbený vánoční film?</p>
+                <div class="answer">
+                    <input type="radio" name="q3" value="A"> A) Grinch
+                    <br>
+                    <input type="radio" name="q3" value="B"> B) Sám doma
+                    <br>
+                    <input type="radio" name="q3" value="C"> C) Gremlins
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Ve které zemi se o Vánocích slaví "La Nochebuena" s velkou večeří a později půlnočním jídlem?</p>
+                <div class="answer">
+                    <input type="radio" name="q4" value="A"> A) Španělsko
+                    <br>
+                    <input type="radio" name="q4" value="B"> B) Itálie
+                    <br>
+                    <input type="radio" name="q4" value="C"> C) Francie
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Co symbolizuje barva červená během Vánoc?</p>
+                <div class="answer">
+                    <input type="radio" name="q5" value="A"> A) Lásku a štěstí
+                    <br>
+                    <input type="radio" name="q5" value="B"> B) Zrození a smrt
+                    <br>
+                    <input type="radio" name="q5" value="C"> C) Zdraví a vitalitu
+                </div>
+            </div>
+
+            <button onclick="checkAnswers()">Vyhodnoceníčko</button>
+
+            <div id="result" class="result" style="display: none;"></div>
+        </div>
+
+        <a href="/" class="back-button">Zpátky do kalendáře</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 S láskou pro Tebe</p>
+    </footer>
+
+    <script>
+        function checkAnswers() {
+            const answers = {
+                q1: 'B',
+                q2: 'B',
+                q3: 'A',
+                q4: 'A',
+                q5: 'A'
+            };
+
+            let score = 0;
+            let totalQuestions = Object.keys(answers).length;
+
+            for (let key in answers) {
+                const selected = document.querySelector(`input[name="${key}"]:checked`);
+                if (selected && selected.value === answers[key]) {
+                    score++;
+                }
+            }
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = `Skóre: ${score} z ${totalQuestions}`;
+        }
+    </script>
+</body>
+</html>

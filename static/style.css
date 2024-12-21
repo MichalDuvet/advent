@@ -1,0 +1,150 @@
+body {
+    font-family: 'Dancing Script', cursive, sans-serif;
+    background: radial-gradient(circle at top, #2e2e3b, #1b1b2f);
+    color: #f8f9fa;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    overflow-y: auto;
+    height: 100%;
+    position: relative;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #ffd700;
+    margin-bottom: 30px;
+    text-shadow: 0px 0px 15px rgba(255, 215, 0, 0.8);
+    font-size: 2.8em;
+    font-family: 'Great Vibes', cursive;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700;
+    }
+    to {
+        text-shadow: 0 0 20px #ff8c00, 0 0 30px #ff4500;
+    }
+}
+
+.calendar-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.day-box {
+    background-color: #fff;
+    border: 2px solid #d54e21;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.6s, background-color 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.day-box:hover {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    transform: scale(1.08);
+}
+
+
+.day-box.opened {
+    background-color: #ffe0e0;
+    border: 2px solid #d54e21;
+    opacity: 0.8;
+}
+
+.day-box a {
+    text-decoration: none;
+    color: #d54e21;
+    font-weight: bold;
+}
+
+.day-box span {
+    color: #ccc;
+    font-weight: bold;
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    font-size: 24px;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+@media (max-width: 600px) {
+    .calendar-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 400px) {
+    .calendar-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 768px) {
+    .calendar-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+body::-webkit-scrollbar {
+    width: 8px;
+}
+body::-webkit-scrollbar-thumb {
+    background-color: #d54e21;
+    border-radius: 4px;
+}
+
+snowflake.style.opacity = Math.random() * 0.5 + 0.3; // Adjusted range for more variation
+@media (max-width: 375px) {
+    h1 {
+        font-size: 2.2em;
+    }
+    .day-box {
+        padding: 15px;
+    }
+    p, ul, ol {
+        font-size: 1.2em;
+    }
+}
+body {
+    background: linear-gradient(135deg, #2e2e3b, #1b1b2f);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.day-box span:hover::after {
+    content: 'Otevřít pro překvapení!';
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    color: #d54e21;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    font-size: 0.9em;
+}

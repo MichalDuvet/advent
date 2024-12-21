@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vánoční brusleníčko</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: url('{{ url_for('static', filename='images/ice-skating.jpg') }}') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Great Vibes', cursive, sans-serif;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            overflow-y: auto;
+        }
+
+        .message-container {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+            position: relative;
+        }
+
+        .message-container::before {
+            content: '\1F384'; /* Christmas tree emoji */
+            font-size: 3rem;
+            position: absolute;
+            top: -20px;
+            left: 20px;
+        }
+
+        .message-container::after {
+            content: '\2744'; /* Snowflake emoji */
+            font-size: 2.5rem;
+            position: absolute;
+            bottom: -20px;
+            right: 20px;
+        }
+
+        h1 {
+            color: #d54e21;
+            text-shadow: 0 0 10px rgba(213, 78, 33, 0.6);
+        }
+
+        .emoji-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .emoji {
+            font-size: 2em;
+            margin: 0 15px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .emoji:hover {
+            transform: scale(1.2);
+        }
+
+        .message {
+            display: none;
+            font-size: 1.2em;
+            color: #1a3d56;
+            margin-top: 10px;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #d54e21;
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #b14019;
+        }
+    </style>
+</head>
+<body>
+    <div class="message-container">
+        <h1>🎄 Vánoční pozvání na rande! ⛸️</h1>
+        <h2>Klikni na emojis a objev překvapení! 🎁</h2>
+
+        <!-- Emoji buttons -->
+        <div class="emoji-container">
+            <div class="emoji" onclick="showMessage('tree')">🌲</div>
+            <div class="emoji" onclick="showMessage('snowman')">☃️</div>
+            <div class="emoji" onclick="showMessage('rink')">⛸️</div>
+        </div>
+
+        <!-- Hidden message containers -->
+        <div id="message-tree" class="message">🌲 Připrav se na kouzelný večer na kluzišti! ⛸️</div>
+        <div id="message-snowman" class="message">☃️ Bude to skvělý zážitek! ❄️</div>
+        <div id="message-rink" class="message">⛸️ Vím, že se bojíš, jak to půjde s Vajankou, ale zvládneme to. 🌟</div>
+
+        <a href="/" class="back-button">Zpátky do kalendáře</a>
+    </div>
+
+    <script>
+        function showMessage(area) {
+            // Hide all messages
+            document.querySelectorAll('.message').forEach(function(msg) {
+                msg.style.display = 'none';
+            });
+
+            // Show the specific message based on the clicked emoji
+            const messageId = 'message-' + area;
+            document.getElementById(messageId).style.display = 'block';
+        }
+    </script>
+</body>
+</html>

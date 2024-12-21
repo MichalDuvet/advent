@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Den 20 - Virtuální Obejmutí</title>
+    <style>
+        body {
+            background: url('{{ url_for('static', filename='images/christmas-background.jpg') }}') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .hug-container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            margin: 50px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bear {
+            width: 120px;
+            position: absolute;
+            transition: all 1s ease;
+        }
+
+        .bear.brown {
+            left: -120px;
+            z-index: 1;
+        }
+
+        .bear.white {
+            right: -120px;
+            z-index: 2;
+        }
+
+        .hug-message {
+            font-size: 1.2em;
+            margin-top: 20px;
+            display: none;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 10px;
+            color: #d54e21;
+            font-weight: bold;
+            text-shadow: none;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #d54e21;
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #b14019;
+        }
+    </style>
+</head>
+<body>
+    <h1>Den 20 - Virtuální Obejmutí 🐻</h1>
+    <p>Bubu a Dudu už se nemůžou dočkat až budou u sebe. Pomůžeš jim? ❤️</p>
+    <div class="hug-container">
+        <img src="{{ url_for('static', filename='images/brown-bear.png') }}" alt="Brown Bear" class="bear brown">
+        <img src="{{ url_for('static', filename='images/white-bear.png') }}" alt="White Bear" class="bear white">
+    </div>
+    <div class="hug-message" id="hug-message">Tohle je speciální vánoční obejmutí jen pro Tebe. ❤️</div>
+    <a href="/" class="back-button">Zpátky do kalendáře</a>
+
+    <script>
+        const brownBear = document.querySelector('.bear.brown');
+        const whiteBear = document.querySelector('.bear.white');
+        const hugMessage = document.getElementById('hug-message');
+
+        function giveHug() {
+            // Move bears towards the center
+            brownBear.style.left = '40px';
+            whiteBear.style.right = '40px';
+
+            // Show the message after the animation
+            setTimeout(() => {
+                hugMessage.style.display = 'block';
+            }, 1000);
+        }
+
+        document.querySelector('.hug-container').addEventListener('click', giveHug);
+    </script>
+</body>
+</html>

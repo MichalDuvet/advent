@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advent Calendar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: 'Dancing Script', cursive, sans-serif;
+            background: radial-gradient(circle at top, #2e2e3b, #1b1b2f);
+            color: #f8f9fa;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            overflow-y: auto; /* Ensure scrolling works */
+            height: 100%; /* Fix height issues */
+            position: relative;
+            box-sizing: border-box;
+            scroll-behavior: smooth; /* Smooth scroll */
+        }
+
+        h1 {
+            color: #ffd700;
+            margin-bottom: 30px;
+            text-shadow: 0px 0px 15px rgba(255, 215, 0, 0.8);
+            font-size: 2.5em;
+            font-family: 'Great Vibes', cursive;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .calendar-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .day-box {
+            background-color: #fff;
+            border: 2px solid #d54e21;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.6s, background-color 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .day-box a {
+            text-decoration: none;
+            color: #d54e21;
+            font-weight: bold;
+        }
+
+        .day-box span {
+            color: #ccc;
+            font-weight: bold;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            font-size: 24px;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .calendar-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .calendar-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .day-box {
+                padding: 15px;
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 375px) {
+            h1 {
+                font-size: 1.6em;
+            }
+
+            .day-box {
+                padding: 10px;
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🎄 Kalendář pro Bubínky 🎄</h1>
+    <div class="calendar-container">
+        {% for day in range(1, 25) %}
+            <div class="day-box" onclick="openDay(this)">
+                {% if all_open or day <= today %}
+                    <a href="{{ url_for('day_content', day=day) }}">Den {{ day }}</a>
+                {% else %}
+                    <span>Den {{ day }}</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.textContent = '❄️';
+
+            snowflake.style.left = Math.random() * window.innerWidth + 'px';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+            snowflake.style.opacity = Math.random() * 0.8 + 0.2;
+            snowflake.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+
+            document.body.appendChild(snowflake);
+
+            setTimeout(() => {
+                snowflake.remove();
+            }, 5000);
+        }
+
+        setInterval(createSnowflake, 100);
+
+        function openDay(element) {
+            element.classList.add('opened');
+            setTimeout(() => {
+                window.location.href = element.querySelector('a').href;
+            }, 800);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Den 20 - Karaoke Vánoční Zpěv</title>
+    <style>
+        body {
+            background: url('{{ url_for('static', filename='images/christmas-background.jpg') }}') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+            color: #ffcc00;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-top: 10px;
+            font-style: italic;
+            color: #ffd700;
+        }
+
+        .video-container {
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-container a {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 1.4em;
+            background-color: #ff4d4d;
+            color: #fff;
+            border-radius: 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-container a:hover {
+            background-color: #d14040;
+            transform: scale(1.05);
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 30px;
+            font-size: 1.4em;
+            color: #fff;
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 15px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #e6b800;
+            transform: scale(1.05);
+        }
+
+        .snowflakes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .snowflake {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: snowflakes 10s linear infinite;
+        }
+
+        @keyframes snowflakes {
+            0% {
+                top: -10px;
+                opacity: 1;
+                transform: translateX(0) scale(0.5);
+            }
+            100% {
+                top: 100vh;
+                opacity: 0.5;
+                transform: translateX(100px) scale(1);
+            }
+        }
+
+        .christmas-lights {
+            display: flex;
+            margin-top: 30px;
+            justify-content: center;
+            align-items: center;
+            animation: blink 1.5s linear infinite;
+        }
+
+        .light {
+            width: 25px;
+            height: 25px;
+            margin: 0 8px;
+            background-color: #ff4d4d;
+            border-radius: 50%;
+            animation: blink-light 1s infinite alternate;
+        }
+
+        .light:nth-child(odd) {
+            background-color: #ffcc00;
+        }
+
+        .light:nth-child(even) {
+            background-color: #ff4d4d;
+        }
+
+        @keyframes blink-light {
+            0% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Reindeer styling and animation */
+        .reindeer {
+            position: absolute;
+            bottom: 0;
+            left: -100px;  /* Start from the left off-screen */
+            width: 50px;  /* Set a smaller size for the reindeer */
+            height: auto;
+            z-index: 9999;
+            animation: reindeerMove 20s linear infinite;
+        }
+
+        @keyframes reindeerMove {
+            0% {
+                left: -100px;
+            }
+            50% {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            100% {
+                left: 100vw;
+            }
+        }
+
+        /* Media query for smaller screens */
+        @media screen and (max-width: 768px) {
+            .reindeer {
+                width: 40px;  /* Slightly smaller size for medium screens */
+            }
+        }
+
+        /* Very small mobile screens (like iPhone mini) */
+        @media screen and (max-width: 480px) {
+            .reindeer {
+                width: 30px;  /* Make it smaller for small mobile screens */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Den 20 - Karaoke Vánoční Zpěv 🎶</h1>
+    <p>"Zpívej a směj se, ať máme ten nejlepší Vánoční čas!" 💖</p>
+
+    <div class="video-container">
+        <a href="https://www.youtube.com/watch?v=3qTDEpO7k8s" target="_blank">Feliz Navidad - Karaoke</a>
+        <a href="https://www.youtube.com/watch?v=l3iEnBThkIc" target="_blank">All I Want for Christmas - Karaoke</a>
+        <a href="https://www.youtube.com/watch?v=7s_9ph5fkHA" target="_blank">Snowman - Karaoke</a>
+    </div>
+
+    <div class="christmas-lights">
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+    </div>
+
+    <div class="snowflakes" aria-hidden="true">
+        <div class="snowflake" style="left: 10%; width: 12px; height: 12px; animation-duration: 12s;"></div>
+        <div class="snowflake" style="left: 30%; width: 15px; height: 15px; animation-duration: 8s;"></div>
+        <div class="snowflake" style="left: 50%; width: 8px; height: 8px; animation-duration: 14s;"></div>
+        <div class="snowflake" style="left: 70%; width: 12px; height: 12px; animation-duration: 9s;"></div>
+        <div class="snowflake" style="left: 90%; width: 18px; height: 18px; animation-duration: 15s;"></div>
+    </div>
+
+    <div class="reindeer">
+        <img src="{{ url_for('static', filename='images/reindeer.png') }}" alt="Reindeer" />
+    </div>
+
+    <a href="/" class="back-button">Zpátky do kalendáře</a>
+
+    <script>
+        // Snowflake falling effect
+        for (let i = 0; i < 20; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.style.left = `${Math.random() * 100}%`;
+            snowflake.style.animationDuration = `${Math.random() * 5 + 5}s`;
+            document.querySelector('.snowflakes').appendChild(snowflake);
+        }
+    </script>
+</body>
+</html>
